@@ -22,7 +22,7 @@ param functionAppToProvision bool = true
 param functionAppTimezone string = 'Korea Standard Time'
 param openApiVersion string = 'v3'
 param openApiDocVersion string = 'v1.0.0'
-param openApiDocTitle string = 'GymLogs Publisher Interface'
+param openApiDocTitle string = 'Fusion Dev Korea App Interface'
 
 module st './storageAccount.bicep' = if (storageAccountToProvision) {
     name: 'StorageAccount'
