@@ -1,0 +1,36 @@
+name: Resource Build, Test & Deploy
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'resources/**'
+
+jobs:
+  arm_template_build_test_deploy_dev:
+    name: 'ARM Templates Build, Test & Deploy'
+
+    runs-on: ubuntu-latest
+
+    env:
+      RESOURCE_GROUP_NAME: 'rg-${{ secrets.RESOURCE_NAME }}-${{ secrets.LOCATION_CODE }}'
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v2
+
+    - name: Login to Azure
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # enable-AzPSSession: true
+
+    - name: Deploy ARM templates
+      uses: Azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+        deploymentName: 'fusiondevkr'
+        template: 'resources/azuredeploy.bicep'
+        parameters: name=${{ secrets.RESOURCE_NAME }} locationCode=${{ secrets.LOCATION_CODE }}
