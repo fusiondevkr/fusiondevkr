@@ -11,7 +11,7 @@ param functionAppTimezone string = 'Korea Standard Time'
 
 param openApiVersion string = 'v2'
 param openApiDocVersion string = 'v1.0.0'
-param openApiDocTitle string = 'FusionDevKRInterface'
+param openApiDocTitle string = 'Fusion Dev Korea App Interface'
 
 var metadata = {
     longName: '{0}-${name}-${locationCode}'
