@@ -53,6 +53,7 @@ resource fncapp 'Microsoft.Web/sites@2020-12-01' = {
                     'https://functions-staging.azure.com'
                     'https://functions-next.azure.com'
                     'https://flow.microsoft.com'
+                    'https://asia.flow.microsoft.com'
                 ]
             }
             appSettings: [
