@@ -5,7 +5,7 @@ VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6E5BDD76-9638-4898-ADDB-5CA7EBFBA8EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionDevKR.FunctionApp", "src\FusionDevKR.FunctionApp\FusionDevKR.FunctionApp.csproj", "{6BAD4998-3E52-453C-947C-7FA3558BAF0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fdk.FlowHelper.FunctionApp", "src\Fdk.FlowHelper.FunctionApp\Fdk.FlowHelper.FunctionApp.csproj", "{6BAD4998-3E52-453C-947C-7FA3558BAF0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

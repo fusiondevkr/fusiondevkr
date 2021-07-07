@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.OpenApi.Models;
 
-namespace FusionDevKR.FunctionApp.Configurations
+namespace Fdk.FlowHelper.FunctionApp.Configurations
 {
     /// <summary>
     /// This represents the options entity for OpenAPI metadata configuration.

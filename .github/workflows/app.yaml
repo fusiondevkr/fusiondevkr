@@ -9,7 +9,7 @@ on:
     - 'test/**'
 
 env:
-  FUNCTIONAPP_PATH: 'src/FusionDevKR.FunctionApp'
+  FUNCTIONAPP_PATH: 'src/Fdk.FlowHelper.FunctionApp'
 
 jobs:
   functionapp_build_test_deploy_dev:

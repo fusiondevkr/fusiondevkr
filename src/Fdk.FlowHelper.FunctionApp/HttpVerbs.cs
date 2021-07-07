@@ -1,4 +1,4 @@
-namespace FusionDevKR.FunctionApp
+namespace Fdk.FlowHelper.FunctionApp
 {
     /// <summary>
     /// This specifies the HTTP method to use.

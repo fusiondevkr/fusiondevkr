@@ -1,4 +1,4 @@
-namespace FusionDevKR.FunctionApp.Configurations
+namespace Fdk.FlowHelper.FunctionApp.Configurations
 {
     /// <summary>
     /// This represents the constants entity for app settings.

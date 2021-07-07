@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
 
-    <AssemblyName>FusionDevKR.FunctionApp</AssemblyName>
-    <RootNamespace>FusionDevKR.FunctionApp</RootNamespace>
+    <AssemblyName>Fdk.FlowHelper.FunctionApp</AssemblyName>
+    <RootNamespace>Fdk.FlowHelper.FunctionApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
