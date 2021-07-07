@@ -2,7 +2,7 @@ using System;
 
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 
-namespace FusionDevKR.FunctionApp.Configurations
+namespace Fdk.FlowHelper.FunctionApp.Configurations
 {
     /// <summary>
     /// This represents the app settings entity.

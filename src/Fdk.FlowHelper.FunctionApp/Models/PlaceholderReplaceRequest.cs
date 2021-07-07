@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace FusionDevKR.FunctionApp.Models
+namespace Fdk.FlowHelper.FunctionApp.Models
 {
     /// <summary>
     /// This represents the model entity for request to replace placeholder values.

@@ -1,8 +1,8 @@
 using System.Net;
 using System.Threading.Tasks;
 
-using FusionDevKR.FunctionApp.Extensions;
-using FusionDevKR.FunctionApp.Models;
+using Fdk.FlowHelper.FunctionApp.Extensions;
+using Fdk.FlowHelper.FunctionApp.Models;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +14,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace FusionDevKR.FunctionApp.Triggers
+namespace Fdk.FlowHelper.FunctionApp.Triggers
 {
     /// <summary>
     /// This represents the HTTP trigger entity to replace placeholders with their respective replacements.

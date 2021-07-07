@@ -1,6 +1,6 @@
-using FusionDevKR.FunctionApp.Models;
+using Fdk.FlowHelper.FunctionApp.Models;
 
-namespace FusionDevKR.FunctionApp.Extensions
+namespace Fdk.FlowHelper.FunctionApp.Extensions
 {
     /// <summary>
     /// This represents the extensions entity for <see cref="PlaceholderReplaceRequest"/>.

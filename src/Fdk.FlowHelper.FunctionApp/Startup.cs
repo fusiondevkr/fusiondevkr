@@ -1,10 +1,10 @@
-using FusionDevKR.FunctionApp.Configurations;
+using Fdk.FlowHelper.FunctionApp.Configurations;
 
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: FunctionsStartup(typeof(FusionDevKR.FunctionApp.Startup))]
-namespace FusionDevKR.FunctionApp
+[assembly: FunctionsStartup(typeof(Fdk.FlowHelper.FunctionApp.Startup))]
+namespace Fdk.FlowHelper.FunctionApp
 {
     /// <summary>
     /// This represents the startup entity for the runtime initialisation.
