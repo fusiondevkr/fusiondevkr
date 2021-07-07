@@ -1,6 +1,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
+using Fdk.FlowHelper.FunctionApp.Examples;
 using Fdk.FlowHelper.FunctionApp.Extensions;
 using Fdk.FlowHelper.FunctionApp.Models;
 
@@ -30,8 +31,8 @@ namespace Fdk.FlowHelper.FunctionApp.Triggers
         [FunctionName(nameof(ReplacePlaceholderHttpTrigger.ReplaceAsync))]
         [OpenApiOperation(operationId: "placeholders.replace", tags: new[] { "placeholder" }, Summary = "Replace placeholders", Description = "This endpoint replaces the placeholders with corresponding values.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity(schemeName: "function_key", schemeType: SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header, Description = "The API key for the function endpoint.")]
-        [OpenApiRequestBody(contentType: ContentTypes.ApplicationJson, bodyType: typeof(PlaceholderReplaceRequest), Required = true, Description = "This is the request payload for the placeholder replace request.")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(PlaceholderReplaceResponse), Summary = "Response payload that the replaced message is included", Description = "Response payload that the replaced message is included")]
+        [OpenApiRequestBody(contentType: ContentTypes.ApplicationJson, bodyType: typeof(PlaceholderReplaceRequest), Required = true, Example = typeof(PlaceholderReplaceRequestExample), Description = "This is the request payload for the placeholder replace request.")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(PlaceholderReplaceResponse), Example = typeof(PlaceholderReplaceResponseExample), Summary = "Response payload that the replaced message is included", Description = "Response payload that the replaced message is included")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid request payload", Description = "This indicates the request payload is invalid.")]
         public async Task<IActionResult> ReplaceAsync(
             [HttpTrigger(AuthorizationLevel.Function, HttpVerbs.POST, Route = "placeholders/replace")] HttpRequest req,
