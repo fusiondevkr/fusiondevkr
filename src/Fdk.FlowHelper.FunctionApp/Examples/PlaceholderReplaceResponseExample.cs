@@ -17,7 +17,7 @@ namespace Fdk.FlowHelper.FunctionApp.Examples
         {
             this.Examples.Add(
                 OpenApiExampleResolver.Resolve(
-                    "error",
+                    "hello",
                     new PlaceholderReplaceResponse()
                     {
                         Result = "hello FusionDevKR, it's FlowHelper.",

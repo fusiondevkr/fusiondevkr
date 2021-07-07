@@ -17,7 +17,7 @@ namespace Fdk.FlowHelper.FunctionApp.Examples
         {
             this.Examples.Add(
                 OpenApiExampleResolver.Resolve(
-                    "error",
+                    "hello",
                     new PlaceholderReplaceRequest()
                     {
                         Message = "hello {{yourName}}, it's {{myName}}.",
