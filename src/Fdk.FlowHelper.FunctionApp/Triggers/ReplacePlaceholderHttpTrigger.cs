@@ -28,7 +28,7 @@ namespace Fdk.FlowHelper.FunctionApp.Triggers
         /// <param name="log"><see cref="ILogger"/> instance.</param>
         /// <returns>Returns the replaced message.</returns>
         [FunctionName(nameof(ReplacePlaceholderHttpTrigger.ReplaceAsync))]
-        [OpenApiOperation(operationId: "placeholder.replace", tags: new[] { "placeholder" }, Summary = "Replace placeholder", Description = "This endpoint replaces the placeholders with corresponding values.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiOperation(operationId: "placeholders.replace", tags: new[] { "placeholder" }, Summary = "Replace placeholders", Description = "This endpoint replaces the placeholders with corresponding values.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity(schemeName: "function_key", schemeType: SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header, Description = "The API key for the function endpoint.")]
         [OpenApiRequestBody(contentType: ContentTypes.ApplicationJson, bodyType: typeof(PlaceholderReplaceRequest), Required = true, Description = "This is the request payload for the placeholder replace request.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(PlaceholderReplaceResponse), Summary = "Response payload that the replaced message is included", Description = "Response payload that the replaced message is included")]
