@@ -7,6 +7,9 @@
     },
     "instanceName": {
       "value": "<RESOURCE_INSTANCE_NAME>"
+    },
+    "openApiDocTitle": {
+      "value": "<OPENAPI_DOCUMENT_TITLE>"
     }
   }
 }
