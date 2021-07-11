@@ -35,7 +35,7 @@ jobs:
         template: 'resources/azuredeploy.bicep'
         parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FLOW_HELPER }} locationCode=${{ secrets.LOCATION_CODE }}
 
-    - name: Deploy ARM templates
+    - name: Deploy ARM templates for FaceRecogniser
       uses: Azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
