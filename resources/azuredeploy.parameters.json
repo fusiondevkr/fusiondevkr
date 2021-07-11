@@ -9,7 +9,7 @@
       "value": "<RESOURCE_INSTANCE_NAME>"
     },
     "openApiDocTitle": {
-      "value": "<OPENAPI_DOCUMENT_TITLE>"
+      "value": "<OPENAPI_DOC_TITLE>"
     }
   }
 }
