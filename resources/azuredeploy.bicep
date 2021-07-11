@@ -1,4 +1,5 @@
 param name string
+param instanceName string
 param location string = resourceGroup().location
 param locationCode string = 'krc'
 
@@ -28,6 +29,7 @@ module st './storageAccount.bicep' = if (storageAccountToProvision) {
     name: 'StorageAccount'
     params: {
         name: name
+        instanceName: instanceName
         location: location
         locationCode: locationCode
         storageAccountSku: storageAccountSku
@@ -38,6 +40,7 @@ module wrkspc './logAnalyticsWorkspace.bicep' = if (workspaceToProvision) {
     name: 'LogAnalyticsWorkspace'
     params: {
         name: name
+        instanceName: instanceName
         location: location
         locationCode: locationCode
         workspaceSku: workspaceSku
@@ -48,6 +51,7 @@ module appins './appInsights.bicep' = if (appInsightsToProvision) {
     name: 'ApplicationInsights'
     params: {
         name: name
+        instanceName: instanceName
         location: location
         locationCode: locationCode
         workspaceId: wrkspc.outputs.id
@@ -68,6 +72,7 @@ module fncapp './functionApp.bicep' = if (functionAppToProvision) {
     name: 'FunctionApp'
     params: {
         name: name
+        instanceName: instanceName
         location: location
         locationCode: locationCode
         storageAccountId: st.outputs.id

@@ -26,11 +26,20 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         # enable-AzPSSession: true
 
+    - name: Deploy ARM templates for FlowHelper
+      uses: Azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+        deploymentName: 'flow_helper'
+        template: 'resources/azuredeploy.bicep'
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FLOW_HELPER }} locationCode=${{ secrets.LOCATION_CODE }}
+
     - name: Deploy ARM templates
       uses: Azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
-        deploymentName: 'fusiondevkr'
+        deploymentName: 'face_recogniser'
         template: 'resources/azuredeploy.bicep'
-        parameters: name=${{ secrets.RESOURCE_NAME }} locationCode=${{ secrets.LOCATION_CODE }}
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FACE_RECOGNISER }} locationCode=${{ secrets.LOCATION_CODE }}

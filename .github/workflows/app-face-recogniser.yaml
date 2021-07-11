@@ -5,11 +5,11 @@ on:
     branches:
     - main
     paths:
-    - 'src/**'
-    - 'test/**'
+    - 'src/Fdk.FaceRecogniser**/**'
+    - 'test/Fdk.FaceRecogniser**/**'
 
 env:
-  FUNCTIONAPP_PATH: 'src/Fdk.FlowHelper.FunctionApp'
+  FUNCTIONAPP_PATH: 'src/Fdk.FaceRecogniser.FunctionApp'
 
 jobs:
   functionapp_build_test_deploy_dev:
@@ -19,7 +19,7 @@ jobs:
 
     env:
       RESOURCE_GROUP_NAME: 'rg-${{ secrets.RESOURCE_NAME }}-${{ secrets.LOCATION_CODE }}'
-      FUNCTIONAPP_NAME: 'fncapp-${{ secrets.RESOURCE_NAME }}-${{ secrets.LOCATION_CODE }}'
+      FUNCTIONAPP_NAME: 'fncapp-${{ secrets.RESOURCE_NAME }}-${{ secrets.INSTANCE_FACE_RECOGNISER }}-${{ secrets.LOCATION_CODE }}'
 
     steps:
     - name: Checkout the repo

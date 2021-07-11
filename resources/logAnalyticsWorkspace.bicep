@@ -1,12 +1,13 @@
 param name string
+param instanceName string
 param location string = resourceGroup().location
 param locationCode string = 'krc'
 
 param workspaceSku string = 'PerGB2018'
 
 var metadata = {
-    longName: '{0}-${name}-${locationCode}'
-    shortName: '{0}${name}${locationCode}'
+    longName: '{0}-${name}-${instanceName}-${locationCode}'
+    shortName: '{0}${name}${instanceName}${locationCode}'
 }
 
 var workspace = {
