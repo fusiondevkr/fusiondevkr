@@ -14,7 +14,7 @@ env:
 
 jobs:
   functionapp_build_test_deploy_dev:
-    name: 'FunctionApp Build, Test & Deploy'
+    name: 'FH FunctionApp Build, Test & Deploy'
 
     runs-on: ubuntu-latest
 
