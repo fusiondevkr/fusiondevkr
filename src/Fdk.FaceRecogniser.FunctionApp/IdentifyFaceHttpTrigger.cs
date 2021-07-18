@@ -82,18 +82,21 @@ namespace Fdk.FaceRecogniser.FunctionApp
                                   .DetectFacesAsync(uploaded)
                                   .ConfigureAwait(false);
 
+            var response = default(FaceIdentificationResponse);
             if (!this.HasOneFaceDetected(faces))
             {
                 await this._blob
                           .DeleteAsync(this._handler.Filename)
                           .ConfigureAwait(false);
 
-                return new BadRequestObjectResult(new FaceIdentificationResponse("Too many faces or no face detected"));
+                response = new FaceIdentificationResponse("Too many faces or no face detected");
+                return new BadRequestObjectResult(response);
             }
 
             if (!this.HasEnoughPhotos(blobs))
             {
-                return new OkObjectResult(new FaceIdentificationResponse($"Need {this._settings.Blob.NumberOfPhotos - blobs.Count} more photo(s)."));
+                response = new FaceIdentificationResponse($"Need {this._settings.Blob.NumberOfPhotos - blobs.Count} more photo(s).");
+                return new OkObjectResult(response);
             }
 
             var identified = await this._face
@@ -110,10 +113,20 @@ namespace Fdk.FaceRecogniser.FunctionApp
                           .DeleteAsync(this._handler.Filename)
                           .ConfigureAwait(false);
 
-                return new BadRequestObjectResult(new FaceIdentificationResponse($"Face not identified: {identified.Confidence:0.00}"));
+                response = new FaceIdentificationResponse($"Face not identified: {identified.Confidence:0.00}")
+                {
+                    Confidence = Convert.ToDecimal(Math.Round(identified.Confidence, 2)),
+                    IsIdentified = false,
+                };
+                return new BadRequestObjectResult(response);
             }
 
-            return new OkObjectResult(new FaceIdentificationResponse($"Face identified: {identified.Confidence:0.00}"));
+            response = new FaceIdentificationResponse($"Face identified: {identified.Confidence:0.00}")
+            {
+                    Confidence = Convert.ToDecimal(Math.Round(identified.Confidence, 2)),
+                    IsIdentified = true,
+            };
+            return new OkObjectResult(response);
         }
 
         private bool HasOneFaceDetected(List<DetectedFace> faces)

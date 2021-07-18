@@ -21,5 +21,17 @@ namespace Fdk.FaceRecogniser.FunctionApp.Models
         /// </summary>
         [JsonProperty("message")]
         public virtual string Message { get; set; }
+
+        /// <summary>
+        /// Gets or sets the confidence level.
+        /// </summary>
+        [JsonProperty("confidence")]
+        public virtual decimal Confidence { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value indicating whether the face is identified or not.
+        /// </summary>
+        [JsonProperty("isIdentified")]
+        public virtual bool IsIdentified { get; set; }
     }
 }
