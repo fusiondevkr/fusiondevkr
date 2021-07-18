@@ -34,6 +34,7 @@ jobs:
         deploymentName: 'flow_helper'
         template: 'resources/azuredeploy.bicep'
         parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FLOW_HELPER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_FLOW_HELPER }}"
+        failOnStdErr: false
 
     - name: Deploy ARM templates for FaceRecogniser
       uses: Azure/arm-deploy@v1
@@ -43,3 +44,4 @@ jobs:
         deploymentName: 'face_recogniser'
         template: 'resources/azuredeploy.bicep'
         parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FACE_RECOGNISER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=true faceApiSku=S0 openApiDocTitle="${{ secrets.DOCTITLE_FACE_RECOGNISER }}"
+        failOnStdErr: false
