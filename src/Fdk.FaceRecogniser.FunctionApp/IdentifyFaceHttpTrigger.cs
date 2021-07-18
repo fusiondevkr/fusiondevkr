@@ -89,13 +89,13 @@ namespace Fdk.FaceRecogniser.FunctionApp
                           .DeleteAsync(this._handler.Filename)
                           .ConfigureAwait(false);
 
-                response = new FaceIdentificationResponse("Too many faces or no face detected");
+                response = new FaceIdentificationResponse("Too many faces or no face detected") { Timestamp = DateTimeOffset.UtcNow };
                 return new BadRequestObjectResult(response);
             }
 
             if (!this.HasEnoughPhotos(blobs))
             {
-                response = new FaceIdentificationResponse($"Need {this._settings.Blob.NumberOfPhotos - blobs.Count} more photo(s).");
+                response = new FaceIdentificationResponse($"Need {this._settings.Blob.NumberOfPhotos - blobs.Count} more photo(s).") { Timestamp = DateTimeOffset.UtcNow };;
                 return new OkObjectResult(response);
             }
 
@@ -117,14 +117,16 @@ namespace Fdk.FaceRecogniser.FunctionApp
                 {
                     Confidence = Convert.ToDecimal(Math.Round(identified.Confidence, 2)),
                     IsIdentified = false,
+                    Timestamp = identified.Timestamp,
                 };
                 return new BadRequestObjectResult(response);
             }
 
             response = new FaceIdentificationResponse($"Face identified: {identified.Confidence:0.00}")
             {
-                    Confidence = Convert.ToDecimal(Math.Round(identified.Confidence, 2)),
-                    IsIdentified = true,
+                Confidence = Convert.ToDecimal(Math.Round(identified.Confidence, 2)),
+                IsIdentified = true,
+                Timestamp = identified.Timestamp,
             };
             return new OkObjectResult(response);
         }

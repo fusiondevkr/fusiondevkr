@@ -1,3 +1,5 @@
+using System;
+
 using Newtonsoft.Json;
 
 namespace Fdk.FaceRecogniser.FunctionApp.Models
@@ -33,5 +35,11 @@ namespace Fdk.FaceRecogniser.FunctionApp.Models
         /// </summary>
         [JsonProperty("isIdentified")]
         public virtual bool IsIdentified { get; set; }
+
+        /// <summary>
+        /// Gets or sets the timestamp
+        /// </summary>
+        [JsonProperty("timestamp")]
+        public virtual DateTimeOffset Timestamp { get; set; }
     }
 }
