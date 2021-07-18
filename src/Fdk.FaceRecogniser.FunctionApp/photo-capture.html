@@ -102,10 +102,13 @@
             "image": $(this).attr("src")
           };
 
+          let queries = new URLSearchParams(window.location.search);
+          let authKey = queries.get("code");
+
           $.ajax({
             type: "POST",
             headers: {
-              "x-functions-key": "ZkGrB61CzgeGcCT6OaFxeKLrwKkdaFpKcIvHYxR3lWFvRd5uKTnrog=="
+              "x-functions-key": authKey
             },
             url: "/api/faces/identify",
             dataType: "json",
