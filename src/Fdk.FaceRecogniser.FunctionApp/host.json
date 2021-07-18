@@ -1,0 +1,21 @@
+{
+  "version": "2.0",
+  "logging": {
+    "logLevel": {
+      "Fdk.FaceRecogniser.FunctionApp.IdentifyFaceHttpTrigger": "Information",
+      "Fdk.FaceRecogniser.FunctionApp.RenderPageHttpTrigger": "Information",
+      "Fdk.FaceRecogniser.FunctionApp.Models.EmbeddedRequest": "Information"
+    },
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  },
+  "extensions": {
+    "http": {
+      "routePrefix": ""
+    }
+  }
+}
