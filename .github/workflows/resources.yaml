@@ -6,6 +6,7 @@ on:
     - main
     paths:
     - 'resources/**'
+    - '.github/workflows/resources.yaml'
 
 jobs:
   arm_template_build_test_deploy_dev:
