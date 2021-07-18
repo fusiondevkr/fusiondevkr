@@ -76,8 +76,7 @@ namespace Fdk.FaceRecogniser.FunctionApp
 
         private void ConfigureHandlers(IServiceCollection services)
         {
-            services.AddTransient<IEmbeddedRequestHandler, EmbeddedRequestHandler>();
-            services.AddTransient<IOpenApiDocumentHandler, OpenApiDocumentHandler>();
+            services.AddTransient<IFaceIdentificationRequestHandler, FaceIdentificationRequestHandler>();
         }
     }
 }

@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Fdk.FaceRecogniser.FunctionApp.Handlers
 {
-    public interface IEmbeddedRequestHandler
+    public interface IFaceIdentificationRequestHandler
     {
         /// <summary>
         /// Gets or sets the raw form of the payload.
@@ -40,22 +40,22 @@ namespace Fdk.FaceRecogniser.FunctionApp.Handlers
         /// <summary>
         /// Processes the embedded request payload for further processing.
         /// </summary>
-        /// <returns>Returns the <see cref="IEmbeddedRequestHandler"/> instance.</returns>
-        Task<IEmbeddedRequestHandler> ProcessAsync(Stream stream);
+        /// <returns>Returns the <see cref="IFaceIdentificationRequestHandler"/> instance.</returns>
+        Task<IFaceIdentificationRequestHandler> ProcessAsync(Stream stream);
     }
 
     /// <summary>
     /// This represents the entity for the embedded request from the front-end.
     /// </summary>
-    public class EmbeddedRequestHandler : IEmbeddedRequestHandler
+    public class FaceIdentificationRequestHandler : IFaceIdentificationRequestHandler
     {
-        private readonly ILogger<IEmbeddedRequestHandler> _logger;
+        private readonly ILogger<IFaceIdentificationRequestHandler> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbeddedRequestHandler"/> class.
         /// </summary>
         /// <param name="payload"><see cref="Stream"/> instance.</param>
-        public EmbeddedRequestHandler(ILogger<IEmbeddedRequestHandler> logger)
+        public FaceIdentificationRequestHandler(ILogger<IFaceIdentificationRequestHandler> logger)
         {
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -76,7 +76,7 @@ namespace Fdk.FaceRecogniser.FunctionApp.Handlers
         public virtual string Filename { get; set; }
 
         /// <inheritdoc />
-        public async Task<IEmbeddedRequestHandler> ProcessAsync(Stream stream)
+        public async Task<IFaceIdentificationRequestHandler> ProcessAsync(Stream stream)
         {
             if (stream == null)
             {
@@ -84,11 +84,11 @@ namespace Fdk.FaceRecogniser.FunctionApp.Handlers
             }
 
             var payload = default(string);
-            var request = default(EmbeddedRequest);
+            var request = default(FaceIdentificationRequest);
             using (var reader = new StreamReader(stream))
             {
                 payload = await reader.ReadToEndAsync().ConfigureAwait(false);
-                request = JsonConvert.DeserializeObject<EmbeddedRequest>(payload);
+                request = JsonConvert.DeserializeObject<FaceIdentificationRequest>(payload);
             }
 
             this.RawData = payload;

@@ -30,7 +30,7 @@ namespace Fdk.FaceRecogniser.FunctionApp
         private readonly AppSettings _settings;
         private readonly IBlobService _blob;
         private readonly IFaceService _face;
-        private readonly IEmbeddedRequestHandler _handler;
+        private readonly IFaceIdentificationRequestHandler _handler;
         private readonly ILogger<IdentifyFaceHttpTrigger> _logger;
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace Fdk.FaceRecogniser.FunctionApp
         /// <param name="settings"><see cref="AppSettings"/> instance.</param>
         /// <param name="blob"><see cref="IBlobService"/> instance.</param>
         /// <param name="face"><see cref="IFaceService"/> instance.</param>
-        /// <param name="handler"><see cref="IEmbeddedRequestHandler"/> instance.</param>
+        /// <param name="handler"><see cref="IFaceIdentificationRequestHandler"/> instance.</param>
         /// <param name="logger"><see cref="ILogger{IdentifyFaceHttpTrigger}"/> instance.</param>
-        public IdentifyFaceHttpTrigger(AppSettings settings, IBlobService blob, IFaceService face, IEmbeddedRequestHandler handler, ILogger<IdentifyFaceHttpTrigger> logger)
+        public IdentifyFaceHttpTrigger(AppSettings settings, IBlobService blob, IFaceService face, IFaceIdentificationRequestHandler handler, ILogger<IdentifyFaceHttpTrigger> logger)
         {
             this._settings = settings ?? throw new ArgumentNullException(nameof(settings));
             this._blob = blob ?? throw new ArgumentNullException(nameof(blob));
@@ -55,13 +55,13 @@ namespace Fdk.FaceRecogniser.FunctionApp
         /// </summary>
         /// <param name="req"><see cref="HttpRequest"/> instance.</param>
         /// <returns>Returns the <see cref="IActionResult"/> instance.</returns>
-        [OpenApiOperation(operationId: "Identify", tags: new[] { "identify" }, Summary = "Identify face", Description = "This operation identifies face taken from the app.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiOperation(operationId: "Faces.Identify", tags: new[] { "face" }, Summary = "Identify face", Description = "This operation identifies face taken from the app.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
-        [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(EmbeddedRequest), Description = "This defines the embedded image data with person group the image belongs.")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(ResultResponse), Summary = "Face identification result", Description = "This defines the face identification result.")]
+        [OpenApiRequestBody(contentType: ContentTypes.ApplicationJson, bodyType: typeof(FaceIdentificationRequest), Description = "This defines the embedded image data with person group the image belongs.")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(FaceIdentificationResponse), Summary = "Face identification result", Description = "This defines the face identification result.")]
         [FunctionName(nameof(IdentifyFaceHttpTrigger.Identify))]
         public async Task<IActionResult> Identify(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "api/faces/identify")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Function, HttpVerbs.POST, Route = "api/faces/identify")] HttpRequest req)
         {
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -87,12 +87,12 @@ namespace Fdk.FaceRecogniser.FunctionApp
                           .DeleteAsync(this._handler.Filename)
                           .ConfigureAwait(false);
 
-                return new OkObjectResult(new ResultResponse(HttpStatusCode.BadRequest, "Too many faces or no face detected"));
+                return new OkObjectResult(new FaceIdentificationResponse(HttpStatusCode.BadRequest, "Too many faces or no face detected"));
             }
 
             if (!this.HasEnoughPhotos(blobs))
             {
-                return new OkObjectResult(new ResultResponse(HttpStatusCode.Created, $"Need {this._settings.Blob.NumberOfPhotos - blobs.Count} more photo(s)."));
+                return new OkObjectResult(new FaceIdentificationResponse(HttpStatusCode.Created, $"Need {this._settings.Blob.NumberOfPhotos - blobs.Count} more photo(s)."));
             }
 
             var identified = await this._face
@@ -109,10 +109,10 @@ namespace Fdk.FaceRecogniser.FunctionApp
                           .DeleteAsync(this._handler.Filename)
                           .ConfigureAwait(false);
 
-                return new OkObjectResult(new ResultResponse(HttpStatusCode.BadRequest, $"Face not identified: {identified.Confidence:0.00}"));
+                return new OkObjectResult(new FaceIdentificationResponse(HttpStatusCode.BadRequest, $"Face not identified: {identified.Confidence:0.00}"));
             }
 
-            return new OkObjectResult(new ResultResponse(HttpStatusCode.OK, $"Face identified: {identified.Confidence:0.00}"));
+            return new OkObjectResult(new FaceIdentificationResponse(HttpStatusCode.OK, $"Face identified: {identified.Confidence:0.00}"));
         }
 
         private bool HasOneFaceDetected(List<DetectedFace> faces)

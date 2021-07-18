@@ -36,7 +36,7 @@ namespace Fdk.FaceRecogniser.FunctionApp
         [FunctionName(nameof(RenderPageHttpTrigger.CaptureFace))]
         [OpenApiIgnore()]
         public async Task<IActionResult> CaptureFace(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "pages/capture")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, HttpVerbs.GET, Route = "pages/capture")] HttpRequest req,
             ExecutionContext context)
         {
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -47,7 +47,7 @@ namespace Fdk.FaceRecogniser.FunctionApp
             {
                 Content = file,
                 StatusCode = 200,
-                ContentType = "text/html"
+                ContentType = ContentTypes.TextHtml
             };
 
             return result;

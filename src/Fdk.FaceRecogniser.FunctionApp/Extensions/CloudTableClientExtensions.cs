@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,6 +36,30 @@ namespace Fdk.FaceRecogniser.FunctionApp.Extensions
             await table.CreateIfNotExistsAsync().ConfigureAwait(false);
 
             return table;
+        }
+
+        /// <summary>
+        /// Gets the list of <see cref="FaceEntity"/> instances.
+        /// </summary>
+        /// <param name="value"><see cref="Task{CloudTable}"/> instance.</param>
+        /// <returns>Returns the list of <see cref="FaceEntity"/> instances.</returns>
+        public static async Task<List<FaceEntity>> GetEntitiesAsync(this Task<CloudTable> value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            var instance = await value.ConfigureAwait(false);
+
+            var query = new TableQuery<FaceEntity>();
+            var entities = await instance.ExecuteQuerySegmentedAsync<FaceEntity>(query, new TableContinuationToken()).ConfigureAwait(false);
+            var result = entities.GroupBy(p => p.PersonGroup)
+                                 .SelectMany(g => g.Where(p => p.Timestamp == g.Max(q => q.Timestamp)))
+                                 .OrderBy(p => p.PersonGroup)
+                                 .ToList();
+
+            return result;
         }
 
         /// <summary>

@@ -7,14 +7,14 @@ namespace Fdk.FaceRecogniser.FunctionApp.Models
     /// <summary>
     /// This represents the response entity for the face identification result.
     /// </summary>
-    public class ResultResponse
+    public class FaceIdentificationResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultResponse"/> class.
         /// </summary>
         /// <param name="statusCode">HTTP status code.</param>
         /// <param name="message">Return message.</param>
-        public ResultResponse(HttpStatusCode statusCode, string message)
+        public FaceIdentificationResponse(HttpStatusCode statusCode, string message)
         {
             this.StatusCode = (int)statusCode;
             this.Message = message;

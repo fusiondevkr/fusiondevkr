@@ -62,6 +62,12 @@ namespace Fdk.FaceRecogniser.FunctionApp.Services
         /// <param name="entity"><see cref="FaceEntity"/> instance.</param>
         /// <returns>Returns the <see cref="FaceEntity"/> instance.</returns>
         Task<FaceEntity> UpdateFaceIdentificationAsync(FaceEntity entity);
+
+        /// <summary>
+        /// Gets the list of the latest face from all person groups.
+        /// </summary>
+        /// <returns>Returns the list of the latest face from all person groups.</returns>
+        Task<List<FaceEntity>> GetAllFacesAsync();
     }
 
     /// <summary>
@@ -213,6 +219,17 @@ namespace Fdk.FaceRecogniser.FunctionApp.Services
                       .ConfigureAwait(false);
 
             return entity;
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<FaceEntity>> GetAllFacesAsync()
+        {
+            var entities = await this._table
+                                     .WithTable(this._settings.Table.Name)
+                                     .GetEntitiesAsync()
+                                     .ConfigureAwait(false);
+
+            return entities;
         }
     }
 }

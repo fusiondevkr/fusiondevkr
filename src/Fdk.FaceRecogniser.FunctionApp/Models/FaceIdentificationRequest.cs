@@ -5,7 +5,7 @@ namespace Fdk.FaceRecogniser.FunctionApp.Models
     /// <summary>
     /// This represents the request entity to take embedded image data.
     /// </summary>
-    public class EmbeddedRequest
+    public class FaceIdentificationRequest
     {
         /// <summary>
         /// Gets or sets the person group.
