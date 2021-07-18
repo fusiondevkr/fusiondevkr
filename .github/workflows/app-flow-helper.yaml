@@ -1,4 +1,4 @@
-name: App Build, Test & Deploy
+name: FH App Build, Test & Deploy
 
 on:
   push:

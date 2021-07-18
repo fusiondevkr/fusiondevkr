@@ -1,4 +1,4 @@
-name: App Build, Test & Deploy
+name: FR App Build, Test & Deploy
 
 on:
   push:
