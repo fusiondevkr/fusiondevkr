@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사진 찍기 - Face Recogniser</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+      <div class="container">
+        <a class="navbar-brand" asp-area="" asp-page="/pages/capture">Face Recogniser</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+          <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+              <a class="nav-link text-dark" asp-area="" asp-page="/pages/capture">Home</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <main role="main" class="pb-3">
+      <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p><a href="https://docs.microsoft.com/ko-kr/azure/azure-functions/functions-overview?WT.mc_id=power-33676-juyoo">애저 펑션</a>을 통해 얼굴 인식을 해 봅시다</p>
+
+        <div id="screenshot">
+          <video autoplay></video>
+          <img src="">
+          <canvas style="display:none;"></canvas>
+
+          <div>
+              <button class="capture-button">카메라 열기</button>
+              <button id="screenshot-button">사진 찍기</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="border-top footer text-muted">
+    <div class="container">
+      &copy; 2021 - <a href="https://fusiondev.kr">퓨전 개발자</a>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script>
+    const constraints = {
+      video: { width: 640, height: 480 }
+    };
+
+    const captureVideoButton = document.querySelector('#screenshot .capture-button');
+    const screenshotButton = document.querySelector('#screenshot-button');
+    const img = document.querySelector('#screenshot img');
+    const video = document.querySelector('#screenshot video');
+
+    const canvas = document.createElement('canvas');
+
+    captureVideoButton.onclick = function () {
+      navigator.mediaDevices
+               .getUserMedia(constraints)
+               .then(handleSuccess)
+               .catch(handleError);
+    };
+
+    screenshotButton.onclick = video.onclick = function () {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      // Other browsers will fall back to image/png
+      img.src = canvas.toDataURL('image/png');
+    };
+
+    function handleSuccess(stream) {
+      screenshotButton.disabled = false;
+      video.srcObject = stream;
+    }
+
+    function handleError(error) {
+      console.error('Error: ', error);
+    }
+  </script>
+  <script>
+    (function ($) {
+      $(document).ready(function() {
+        $("#screenshot img").on("load", function() {
+          let payload = {
+            "personGroup": "justinyoo",
+            "image": $(this).attr("src")
+          };
+
+          $.ajax({
+            type: "POST",
+            headers: {
+              "x-functions-key": "ZkGrB61CzgeGcCT6OaFxeKLrwKkdaFpKcIvHYxR3lWFvRd5uKTnrog=="
+            },
+            url: "/api/faces/identify",
+            dataType: "json",
+            data: JSON.stringify(payload)
+          });
+        });
+      });
+    })(jQuery);
+  </script>
+</body>
+
+</html>

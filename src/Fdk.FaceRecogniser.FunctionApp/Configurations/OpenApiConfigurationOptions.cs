@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.OpenApi.Models;
 
-namespace Fdk.FlowHelper.FunctionApp.Configurations
+namespace Fdk.FaceRecogniser.FunctionApp.Configurations
 {
     /// <summary>
     /// This represents the options entity for OpenAPI metadata configuration.
@@ -22,7 +22,7 @@ namespace Fdk.FlowHelper.FunctionApp.Configurations
             {
                 Version = Environment.GetEnvironmentVariable(AppSettingsKeys.OpenApiDocVersionKey) ?? OpenApiConfigurationOptions.DefaultDocVersion(),
                 Title = Environment.GetEnvironmentVariable(AppSettingsKeys.OpenApiDocTitleKey) ?? OpenApiConfigurationOptions.DefaultDocTitle(typeof(OpenApiConfigurationOptions)),
-                Description = "Interface that Fusion Dev Korea apps use for flow.",
+                Description = "Interface that Fusion Dev Korea apps use for face recognition.",
                 TermsOfService = new Uri("https://github.com/fusiondevkr/fusiondevkr"),
                 Contact = new OpenApiContact()
                 {
