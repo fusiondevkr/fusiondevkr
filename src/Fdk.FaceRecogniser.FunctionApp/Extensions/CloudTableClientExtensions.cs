@@ -63,6 +63,30 @@ namespace Fdk.FaceRecogniser.FunctionApp.Extensions
         }
 
         /// <summary>
+        /// Gets the list of <see cref="FaceEntity"/> instances.
+        /// </summary>
+        /// <param name="value"><see cref="Task{CloudTable}"/> instance.</param>
+        /// <param name="personGroupName">Name of the person group.</param>
+        /// <returns>Returns the list of <see cref="FaceEntity"/> instances.</returns>
+        public static async Task<List<FaceEntity>> GetEntitiesAsync(this Task<CloudTable> value, string personGroupName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            var instance = await value.ConfigureAwait(false);
+
+            var query = new TableQuery<FaceEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, personGroupName));
+            var entities = await instance.ExecuteQuerySegmentedAsync<FaceEntity>(query, new TableContinuationToken()).ConfigureAwait(false);
+            var result = entities.Results
+                                 .OrderByDescending(p => p.Timestamp)
+                                 .ToList();
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the <see cref="FaceEntity"/> instance.
         /// </summary>
         /// <param name="value"><see cref="Task{CloudTable}"/> instance.</param>

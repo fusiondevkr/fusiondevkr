@@ -68,6 +68,13 @@ namespace Fdk.FaceRecogniser.FunctionApp.Services
         /// </summary>
         /// <returns>Returns the list of the latest face from all person groups.</returns>
         Task<List<FaceEntity>> GetAllFacesAsync();
+
+        /// <summary>
+        /// Gets the list of all faces from the given person group.
+        /// </summary>
+        /// <param name="personGroup">Name of the person group.</param>
+        /// <returns>Returns the list of the latest face from all person groups.</returns>
+        Task<List<FaceEntity>> GetAllFacesAsync(string personGroup);
     }
 
     /// <summary>
@@ -227,6 +234,17 @@ namespace Fdk.FaceRecogniser.FunctionApp.Services
             var entities = await this._table
                                      .WithTable(this._settings.Table.Name)
                                      .GetEntitiesAsync()
+                                     .ConfigureAwait(false);
+
+            return entities;
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<FaceEntity>> GetAllFacesAsync(string personGroup)
+        {
+            var entities = await this._table
+                                     .WithTable(this._settings.Table.Name)
+                                     .GetEntitiesAsync(personGroup)
                                      .ConfigureAwait(false);
 
             return entities;

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
@@ -44,11 +46,11 @@ namespace Fdk.FaceRecogniser.FunctionApp
         /// </summary>
         /// <param name="req"><see cref="HttpRequest"/> instance.</param>
         /// <returns>Returns the <see cref="IActionResult"/> instance.</returns>
-        [OpenApiOperation(operationId: "Faces.GetAll", tags: new[] { "face" }, Summary = "Get the latest face from all person groups", Description = "This operation gets the latest faces from all person groups.", Visibility = OpenApiVisibilityType.Important)]
+        [FunctionName(nameof(GetFaceHttpTrigger.GetLatestFaceFromEacyPersonGroup))]
+        [OpenApiOperation(operationId: "Faces.GetLatestFaceFromEacyPersonGroup", tags: new[] { "face" }, Summary = "Get the latest face from all person groups", Description = "This operation gets the latest faces from all person groups.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(FaceCollectionResponse), Summary = "The collection of the face details", Description = "This defines the collection of the face details.")]
-        [FunctionName(nameof(GetFaceHttpTrigger.GetFaces))]
-        public async Task<IActionResult> GetFaces(
+        public async Task<IActionResult> GetLatestFaceFromEacyPersonGroup(
             [HttpTrigger(AuthorizationLevel.Function, HttpVerbs.GET, Route = "api/faces")] HttpRequest req)
         {
             this._logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -56,6 +58,43 @@ namespace Fdk.FaceRecogniser.FunctionApp
             var faces = await this._face
                                   .GetAllFacesAsync()
                                   .ConfigureAwait(false);
+
+            var collection = new FaceCollectionResponse(faces);
+
+            return new OkObjectResult(collection);
+        }
+
+        /// <summary>
+        /// Invokes to identify faces.
+        /// </summary>
+        /// <param name="req"><see cref="HttpRequest"/> instance.</param>
+        /// <param name="personGroup">The person group name.</param>
+        /// <returns>Returns the <see cref="IActionResult"/> instance.</returns>
+        [FunctionName(nameof(GetFaceHttpTrigger.GetFacesOfPersonGroup))]
+        [OpenApiOperation(operationId: "Faces.GetFacesOfPersonGroup", tags: new[] { "face" }, Summary = "Get the latest face from all person groups", Description = "This operation gets the latest faces from all person groups.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiParameter("personGroup", Type = typeof(string), Required = true, In = ParameterLocation.Path, Summary = "The person group name", Description = "This is the person group name.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(FaceCollectionResponse), Summary = "The collection of the face details", Description = "This defines the collection of the face details.")]
+        [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Summary = "No person group found", Description = "This is returned when no person group found.")]
+        public async Task<IActionResult> GetFacesOfPersonGroup(
+            [HttpTrigger(AuthorizationLevel.Function, HttpVerbs.GET, Route = "api/faces/{personGroup}")] HttpRequest req,
+            string personGroup)
+        {
+            this._logger.LogInformation("C# HTTP trigger function processed a request.");
+
+            if (personGroup.IsNullOrWhiteSpace())
+            {
+                return new NotFoundResult();
+            }
+
+            var faces = await this._face
+                                  .GetAllFacesAsync(personGroup)
+                                  .ConfigureAwait(false);
+
+            if (!faces.Any())
+            {
+                return new NotFoundResult();
+            }
 
             var collection = new FaceCollectionResponse(faces);
 
