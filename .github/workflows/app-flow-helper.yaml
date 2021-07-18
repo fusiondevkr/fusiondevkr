@@ -7,6 +7,7 @@ on:
     paths:
     - 'src/Fdk.FlowHelper**/**'
     - 'test/Fdk.FlowHelper**/**'
+    - '.github/workflows/app-flow-helper.yaml'
 
 env:
   FUNCTIONAPP_PATH: 'src/Fdk.FlowHelper.FunctionApp'

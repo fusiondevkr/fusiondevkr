@@ -7,6 +7,7 @@ on:
     paths:
     - 'src/Fdk.FaceRecogniser**/**'
     - 'test/Fdk.FaceRecogniser**/**'
+    - '.github/workflows/app-face-recogniser.yaml'
 
 env:
   FUNCTIONAPP_PATH: 'src/Fdk.FaceRecogniser.FunctionApp'

@@ -3,6 +3,10 @@ param instanceName string
 param location string = resourceGroup().location
 param locationCode string = 'krc'
 
+// Face API
+param faceApiSkuToProvision bool = false
+param faceApiSku string = 'F0'
+
 // Storage
 param storageAccountToProvision bool = true
 param storageAccountSku string = 'Standard_LRS'
@@ -24,6 +28,17 @@ param functionAppTimezone string = 'Korea Standard Time'
 param openApiVersion string = 'v3'
 param openApiDocVersion string = 'v1.0.0'
 param openApiDocTitle string = 'Fusion Dev Korea App Interface'
+
+module face './faceapi.bicep' = if (faceApiSkuToProvision) {
+    name: 'FaceApi'
+    params: {
+        name: name
+        instanceName: instanceName
+        location: location
+        locationCode: locationCode
+        faceApiSku: faceApiSku
+    }
+}
 
 module st './storageAccount.bicep' = if (storageAccountToProvision) {
     name: 'StorageAccount'
