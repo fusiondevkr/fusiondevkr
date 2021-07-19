@@ -15,6 +15,7 @@ namespace Fdk.FlowHelper.FunctionApp
         public override void Configure(IFunctionsHostBuilder builder)
         {
             this.ConfigureAppSettings(builder.Services);
+            this.ConfigureHttpClient(builder.Services);
             this.ConfigureClients(builder.Services);
             this.ConfigureServices(builder.Services);
         }
@@ -22,6 +23,10 @@ namespace Fdk.FlowHelper.FunctionApp
         private void ConfigureAppSettings(IServiceCollection services)
         {
             services.AddSingleton<AppSettings>();
+        }
+
+        private void ConfigureHttpClient(IServiceCollection services)
+        {
         }
 
         private void ConfigureClients(IServiceCollection services)
