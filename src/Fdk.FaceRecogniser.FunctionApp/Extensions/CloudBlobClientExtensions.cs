@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -39,9 +40,8 @@ namespace Fdk.FaceRecogniser.FunctionApp.Extensions
         /// </summary>
         /// <param name="value"><see cref="Task{CloudBlobContainer}"/> instance.</param>
         /// <param name="prefix">Prefix value. It's usually the directory name.</param>
-        /// <param name="count">Number of blobs to retrieve.</param>
         /// <returns>Returns the <see cref="BlobResultSegment"/> instance.</returns>
-        public static async Task<BlobResultSegment> GetBlobsAsync(this Task<CloudBlobContainer> value, string prefix, int count)
+        public static async Task<BlobResultSegment> GetBlobsAsync(this Task<CloudBlobContainer> value, string prefix)
         {
             if (value == null)
             {
@@ -53,13 +53,8 @@ namespace Fdk.FaceRecogniser.FunctionApp.Extensions
                 throw new ArgumentNullException(nameof(prefix));
             }
 
-            if (count < 1)
-            {
-                throw new ArgumentOutOfRangeException(nameof(count));
-            }
-
             var instance = await value.ConfigureAwait(false);
-            var result = await instance.ListBlobsSegmentedAsync(prefix, true, BlobListingDetails.Metadata, count, null, null, null)
+            var result = await instance.ListBlobsSegmentedAsync(prefix, true, BlobListingDetails.Metadata, 1000, null, null, null)
                                        .ConfigureAwait(false);
 
             return result;

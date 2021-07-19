@@ -117,7 +117,7 @@ namespace Fdk.FaceRecogniser.FunctionApp
                 {
                     Confidence = Convert.ToDecimal(Math.Round(identified.Confidence, 2)),
                     IsIdentified = false,
-                    Timestamp = identified.Timestamp,
+                    Timestamp = DateTimeOffset.UtcNow,
                 };
                 return new BadRequestObjectResult(response);
             }

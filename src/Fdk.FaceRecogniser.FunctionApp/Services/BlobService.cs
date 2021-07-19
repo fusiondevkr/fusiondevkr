@@ -68,8 +68,8 @@ namespace Fdk.FaceRecogniser.FunctionApp.Services
 
             var items = await this._client
                                   .WithContainer(this._settings.Blob.Container)
-                                  .GetBlobsAsync($"{personGroup}/", numberOfPhotos)
-                                  .GetResults<CloudBlockBlob>()
+                                  .GetBlobsAsync($"{personGroup}/")
+                                  .GetResults<CloudBlockBlob>(numberOfPhotos)
                                   .ConfigureAwait(false);
 
             return items;

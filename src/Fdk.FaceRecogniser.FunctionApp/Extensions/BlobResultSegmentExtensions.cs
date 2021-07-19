@@ -12,22 +12,54 @@ namespace Fdk.FaceRecogniser.FunctionApp.Extensions
     /// </summary>
     public static class BlobResultSegmentExtensions
     {
+        private static Random random = new Random();
+
         /// <summary>
-        /// GEts the list of blobs.
+        /// Gets the list of blobs in random order.
         /// </summary>
-        /// <param name="value"><see cref="Task{BlobResultSegment}"/> instance.</param>
         /// <typeparam name="T">Type of blob.</typeparam>
+        /// <param name="value"><see cref="Task{BlobResultSegment}"/> instance.</param>
+        /// <param name="count">Number of blobs to retrieve.</param>
         /// <returns>Returns the list of blobs.</returns>
-        public static async Task<List<T>> GetResults<T>(this Task<BlobResultSegment> value)
+        public static async Task<List<T>> GetResults<T>(this Task<BlobResultSegment> value, int count)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
+            if (count < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
             var instance = await value.ConfigureAwait(false);
 
-            var results = instance.Results.Select(p => (T)p).ToList();
+            var maxValue = instance.Results.Count();
+            if (maxValue <= count)
+            {
+                return instance.Results.Select(p => (T)p).ToList();
+            }
+
+            var indices = new List<int>();
+            while (indices.Count < count)
+            {
+                var index = random.Next(maxValue);
+                if (indices.Contains(index))
+                {
+                    continue;
+                }
+
+                indices.Add(index);
+            }
+
+            var interim = instance.Results.Select(p => (T)p).ToList();
+
+            var results = new List<T>();
+            foreach(var index in indices)
+            {
+                results.Add(interim.Skip(index).Take(1).First());
+            }
 
             return results;
         }

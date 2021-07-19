@@ -213,6 +213,7 @@ namespace Fdk.FaceRecogniser.FunctionApp.Services
 
             var confidence = identified.First().Candidates.First().Confidence;
             entity.Confidence = confidence;
+            entity.Timestamp = DateTimeOffset.UtcNow;
 
             return entity;
         }
