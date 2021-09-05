@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 using Fdk.FlowHelper.FunctionApp.Configurations;
 
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
@@ -35,6 +37,9 @@ namespace Fdk.FlowHelper.FunctionApp
 
         private void ConfigureServices(IServiceCollection services)
         {
+            var regex = new Regex(@"^[가-힣]+$");
+
+            services.AddSingleton(regex);
         }
     }
 }
