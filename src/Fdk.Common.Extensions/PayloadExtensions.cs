@@ -1,10 +1,6 @@
-using Fdk.FlowHelper.FunctionApp.Models;
-
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
-
 using Newtonsoft.Json;
 
-namespace Fdk.FlowHelper.FunctionApp.Extensions
+namespace Fdk.Common.Extensions
 {
     /// <summary>
     /// This represents the extensions entity for any payload.
@@ -18,7 +14,7 @@ namespace Fdk.FlowHelper.FunctionApp.Extensions
         /// <returns>Returns the replaced value.</returns>
         public static string ToJson<T>(this T payload)
         {
-            if (payload.IsNullOrDefault())
+            if (payload == null)
             {
                 return null;
             }

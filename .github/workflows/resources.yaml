@@ -46,3 +46,13 @@ jobs:
         template: 'resources/azuredeploy.bicep'
         parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FACE_RECOGNISER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=true faceApiSku=S0 openApiDocTitle="${{ secrets.DOCTITLE_FACE_RECOGNISER }}"
         failOnStdErr: false
+
+    - name: Deploy ARM templates for CheckPointHelper
+      uses: Azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+        deploymentName: 'checkin_helper'
+        template: 'resources/azuredeploy.bicep'
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_CHECKPOINT_HELPER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_CHECKPOINT_HELPER }}"
+        failOnStdErr: false

@@ -8,6 +8,13 @@ param storageAccountName string
 param appInsightsId string
 param consumptionPlanId string
 
+@allowed([
+    'None'
+    'SystemAssigned'
+    'UserAssigned'
+])
+param managedServiceIdentity string = 'None'
+
 param functionAppTimezone string = 'Korea Standard Time'
 
 param openApiVersion string = 'v2'
@@ -33,6 +40,7 @@ var functionApp = {
     name: format(metadata.longName, 'fncapp')
     location: location
     timezone: functionAppTimezone
+    managedServiceIdentity: managedServiceIdentity
     openapi: {
         version: openApiVersion
         docVersion: openApiDocVersion
@@ -44,6 +52,9 @@ resource fncapp 'Microsoft.Web/sites@2020-12-01' = {
     name: functionApp.name
     location: functionApp.location
     kind: 'functionapp'
+    identity: {
+        type: functionApp.managedServiceIdentity
+    }
     properties: {
         serverFarmId: consumption.id
         httpsOnly: true

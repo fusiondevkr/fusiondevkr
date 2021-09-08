@@ -4,18 +4,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
 
-    <AssemblyName>Fdk.FaceRecogniser.FunctionApp</AssemblyName>
-    <RootNamespace>Fdk.FaceRecogniser.FunctionApp</RootNamespace>
+    <AssemblyName>Fdk.CheckPointHelper.FunctionApp</AssemblyName>
+    <RootNamespace>Fdk.CheckPointHelper.FunctionApp</RootNamespace>
 
     <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.7.0-preview.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.OpenApi" Version="0.8.1-preview" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.18" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fdk.Common.Extensions\Fdk.Common.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +28,6 @@
     <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-    <None Update="photo-capture.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

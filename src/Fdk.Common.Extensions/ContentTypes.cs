@@ -1,4 +1,4 @@
-namespace Fdk.FlowHelper.FunctionApp
+namespace Fdk.Common.Extensions
 {
     /// <summary>
     /// This specifies the content types.

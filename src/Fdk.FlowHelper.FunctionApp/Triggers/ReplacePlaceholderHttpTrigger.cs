@@ -1,6 +1,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
+using Fdk.Common.Extensions;
 using Fdk.FlowHelper.FunctionApp.Examples;
 using Fdk.FlowHelper.FunctionApp.Extensions;
 using Fdk.FlowHelper.FunctionApp.Models;

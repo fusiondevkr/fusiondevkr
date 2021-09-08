@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 using Newtonsoft.Json;
 
-namespace Fdk.FlowHelper.FunctionApp.Extensions
+namespace Fdk.Common.Extensions
 {
     /// <summary>
     /// This represents the extension entity for <see cref="HttpRequest"/>.

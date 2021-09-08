@@ -4,9 +4,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using Fdk.CheckPointHelper.FunctionApp.Configurations;
+using Fdk.CheckPointHelper.FunctionApp.Examples;
+using Fdk.CheckPointHelper.FunctionApp.Models;
 using Fdk.Common.Extensions;
-using Fdk.FlowHelper.FunctionApp.Examples;
-using Fdk.FlowHelper.FunctionApp.Models;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,21 +21,25 @@ using Microsoft.OpenApi.Models;
 
 using Newtonsoft.Json;
 
-namespace Fdk.FlowHelper.FunctionApp.Triggers
+
+namespace Fdk.CheckPointHelper.FunctionApp.Triggers
 {
     /// <summary>
-    /// This represents the HTTP trigger entity to replace placeholders with their respective replacements.
+    /// This represents the HTTP trigger entity to invoke check-in flow.
     /// </summary>
     public class CheckInFlowHttpTrigger
     {
+        private readonly AppSettings _settings;
         private readonly HttpClient _http;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckInFlowHttpTrigger"/> class.
         /// </summary>
+        /// <param name="settings"><see cref="AppSettings"/> instance.</param>
         /// <param name="httpClient"><see cref="HttpClient"/> instance.</param>
-        public CheckInFlowHttpTrigger(HttpClient httpClient)
+        public CheckInFlowHttpTrigger(AppSettings settings, HttpClient httpClient)
         {
+            this._settings = settings.ThrowIfNullOrDefault();
             this._http = httpClient.ThrowIfNullOrDefault();
         }
 
@@ -45,7 +50,7 @@ namespace Fdk.FlowHelper.FunctionApp.Triggers
         /// <param name="log"><see cref="ILogger"/> instance.</param>
         /// <returns>Returns the check-in message.</returns>
         [FunctionName(nameof(CheckInFlowHttpTrigger.RunAsync))]
-        [OpenApiOperation(operationId: "checkin.run", tags: new[] { "checkin" }, Summary = "Run check-in", Description = "This endpoint runs the check-in workflow.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiOperation(operationId: "CheckIn", tags: new[] { "checkin" }, Summary = "Run check-in", Description = "This endpoint runs the check-in workflow.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity(schemeName: "function_key", schemeType: SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header, Description = "The API key for the function endpoint.")]
         [OpenApiRequestBody(contentType: ContentTypes.ApplicationJson, bodyType: typeof(CheckInRequest), Required = true, Example = typeof(CheckInRequestExample), Description = "This is the request payload for the check-in.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(CheckInResponse), Example = typeof(CheckInResponseExample), Summary = "Response payload including the check-in result.", Description = "Response payload that includes the check-in result.")]
@@ -62,12 +67,14 @@ namespace Fdk.FlowHelper.FunctionApp.Triggers
                 return new BadRequestResult();
             }
 
+            request.Timestamp = DateTimeOffset.UtcNow;
+
             var response = default(CheckInResponse);
             var res = default(OkObjectResult);
             try
             {
-                using (var content = new StringContent(request.CheckInDetails.ToJson(), Encoding.UTF8, ContentTypes.ApplicationJson))
-                using (var message = await this._http.PostAsync(request.WorkflowUrl, content).ConfigureAwait(false))
+                using (var content = new StringContent(request.ToJson(), Encoding.UTF8, ContentTypes.ApplicationJson))
+                using (var message = await this._http.PostAsync(this._settings.Workflows.CheckInUrl, content).ConfigureAwait(false))
                 {
                     message.EnsureSuccessStatusCode();
 
