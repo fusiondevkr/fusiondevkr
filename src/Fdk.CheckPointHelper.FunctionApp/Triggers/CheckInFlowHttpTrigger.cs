@@ -21,7 +21,6 @@ using Microsoft.OpenApi.Models;
 
 using Newtonsoft.Json;
 
-
 namespace Fdk.CheckPointHelper.FunctionApp.Triggers
 {
     /// <summary>
