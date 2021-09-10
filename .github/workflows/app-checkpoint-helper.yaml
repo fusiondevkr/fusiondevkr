@@ -36,6 +36,11 @@ jobs:
       with:
         dotnet-version: '3.1.x'
 
+    - name: Setup .NET 5 SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.x'
+
     - name: Restore NuGet packages
       shell: bash
       run: |
