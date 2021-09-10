@@ -32,6 +32,9 @@ param openApiDocTitle string = 'Fusion Dev Korea App Interface'
 // Static App
 param staticAppToProvision bool = true
 
+@secure()
+param ghAuthToken string
+
 module face './faceapi.bicep' = if (faceApiSkuToProvision) {
     name: 'FaceApi'
     params: {
@@ -111,5 +114,6 @@ module sttapp './staticWebApp.bicep' = if (staticAppToProvision) {
         instanceName: instanceName
         location: 'eastasia'
         locationCode: 'ea'
+        ghAuthToken: ghAuthToken
     }
 }

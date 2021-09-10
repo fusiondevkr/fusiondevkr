@@ -74,5 +74,5 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
         deploymentName: 'registration'
         template: 'resources/azuredeploy.bicep'
-        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_REGISTRATION }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false storageAccountToProvision=false workspaceToProvision=false appInsightsToProvision=false consumptionPlanToProvision=false functionAppToProvision=false
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_REGISTRATION }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false storageAccountToProvision=false workspaceToProvision=false appInsightsToProvision=false consumptionPlanToProvision=false functionAppToProvision=false ghAuthToken=${{ secrets.GITHUB_TOKEN }}
         failOnStdErr: false
