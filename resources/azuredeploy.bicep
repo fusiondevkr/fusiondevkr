@@ -33,7 +33,7 @@ param openApiDocTitle string = 'Fusion Dev Korea App Interface'
 param staticAppToProvision bool = true
 
 @secure()
-param ghAuthToken string
+param ghAuthToken string = ''
 
 module face './faceapi.bicep' = if (faceApiSkuToProvision) {
     name: 'FaceApi'
