@@ -36,6 +36,36 @@ namespace Fdk.M365Register.ApiApp.Configurations
         public const string OpenApiDocTitleKey = "OpenApi__DocTitle";
 
         /// <summary>
+        /// Identifies the login URI key to to Microsoft Graph.
+        /// </summary>
+        public const string MsGraphLoginUriKey = "MsGraph__LoginUri";
+
+        /// <summary>
+        /// Identifies the tenant ID key to to Microsoft Graph.
+        /// </summary>
+        public const string MsGraphTenantIdKey = "MsGraph__TenantId";
+
+        /// <summary>
+        /// Identifies the client ID key to to Microsoft Graph.
+        /// </summary>
+        public const string MsGraphClientIdKey = "MsGraph__ClientId";
+
+        /// <summary>
+        /// Identifies the client secret key to to Microsoft Graph.
+        /// </summary>
+        public const string MsGraphClientSecretKey = "MsGraph__ClientSecret";
+
+        /// <summary>
+        /// Identifies the API URI of the Microsoft Graph API.
+        /// </summary>
+        public const string MsGraphApiUriKey = "MsGraph__ApiUri";
+
+        /// <summary>
+        /// Identifies the base URI of the Microsoft Graph API.
+        /// </summary>
+        public const string MsGraphBaseUriKey = "MsGraph__BaseUri";
+
+        /// <summary>
         /// Identifies the workflow key for registration.
         /// </summary>
         public const string WorkflowsRegistrationUrlKey = "Workflows__Registration";

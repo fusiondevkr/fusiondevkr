@@ -1,26 +1,16 @@
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Fdk.M365Register.WasmApp.Models
 {
+    /// <summary>
+    /// This represents the entity for authentication details.
+    /// </summary>
     public class AuthenticationDetails
     {
+        /// <summary>
+        /// Gets or sets the <see cref="ClientPrincipal"/> instance.
+        /// </summary>
         [JsonPropertyName("clientPrincipal")]
         public ClientPrincipal ClientPrincipal { get; set; }
-    }
-
-    public class ClientPrincipal
-    {
-        [JsonPropertyName("identityProvider")]
-        public string IdentityProvider { get; set; }
-
-        [JsonPropertyName("userId")]
-        public string UserId { get; set; }
-
-        [JsonPropertyName("userDetails")]
-        public string UserDetails { get; set; }
-
-        [JsonPropertyName("userRoles")]
-        public IEnumerable<string> UserRoles { get; set; }
     }
 }

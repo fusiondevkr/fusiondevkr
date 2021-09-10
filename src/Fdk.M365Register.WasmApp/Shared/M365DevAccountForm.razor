@@ -12,7 +12,7 @@
     </div>
     <div class="mb-3">
         <label for="m365Email" class="form-label">M365 개발자 계정 이메일</label>
-        <input type="email" class="form-control form-control-lg" id="m365Email" value="@M365Email" placeholder="M365 개발자 계정 이메일 주소 (예: onyu@contoso.onmicrosoft.com)" aria-label="M365 email">
+        <input type="email" class="form-control form-control-lg" id="m365Email" @bind="M365Email" placeholder="M365 개발자 계정 이메일 주소 (예: onyu@contoso.onmicrosoft.com)" aria-label="M365 email">
     </div>
     <div class="mb-3">
         <button type="button" class="btn btn-danger" @onclick="Reset">취소</button>

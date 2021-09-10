@@ -48,13 +48,13 @@ namespace Fdk.M365Register.ApiApp.Triggers
         /// <param name="req"><see cref="HttpRequest"/> instance.</param>
         /// <param name="log"><see cref="ILogger"/> instance.</param>
         /// <returns>Returns the check-in message.</returns>
-        [FunctionName(nameof(RegistrationFlowHttpTrigger.RunAsync))]
-        [OpenApiOperation(operationId: "register", tags: new[] { "registration" }, Summary = "Run registration", Description = "This endpoint runs the registration workflow.", Visibility = OpenApiVisibilityType.Important)]
+        [FunctionName(nameof(RegistrationFlowHttpTrigger.RegisterUserAsync))]
+        [OpenApiOperation(operationId: "registerUser", tags: new[] { "registration" }, Summary = "Run registration", Description = "This endpoint runs the registration workflow.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiRequestBody(contentType: ContentTypes.ApplicationJson, bodyType: typeof(RegistrationRequest), Required = true, Example = typeof(RegistrationRequestExample), Description = "This is the request payload for the registration.")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: ContentTypes.ApplicationJson, bodyType: typeof(RegistrationResponse), Example = typeof(RegistrationResponseExample), Summary = "Response payload including the registration result.", Description = "Response payload that includes the registration result.")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid request payload", Description = "This indicates the request payload is invalid.")]
-        public async Task<IActionResult> RunAsync(
-            [HttpTrigger(AuthorizationLevel.Anonymous, HttpVerbs.POST, Route = "registrations/run")] HttpRequest req,
+        public async Task<IActionResult> RegisterUserAsync(
+            [HttpTrigger(AuthorizationLevel.Anonymous, HttpVerbs.POST, Route = "m365/register")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");

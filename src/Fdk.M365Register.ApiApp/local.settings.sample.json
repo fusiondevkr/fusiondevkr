@@ -8,6 +8,13 @@
     "OpenApi__DocVersion": "1.0.0",
     "OpenApi__DocTitle": "M365 Dev Account Registration Interface",
 
+    "MsGraph__LoginUri": "https://login.microsoftonline.com/",
+    "MsGraph__TenantId": "<tenant_id>",
+    "MsGraph__ClientId": "<client_id>",
+    "MsGraph__ClientSecret": "<client_secret>",
+    "MsGraph__ApiUri": "https://graph.microsoft.com/",
+    "MsGraph__BaseUri": "v1.0/",
+
     "Workflows__Registration": "https://<microsoft_flow_registration_endpoint>"
   },
   "Host": {

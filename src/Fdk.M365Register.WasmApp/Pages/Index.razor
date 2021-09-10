@@ -2,4 +2,6 @@
 
 <h1>M365 개발자 계정 등록</h1>
 
-<M365DevAccountForm Name="Hello" UserEmail="onyu@fourthcoffee.onmicrosoft.com" />
+<div hidden="@IsHidden">
+    <M365DevAccountForm Name="@DisplayName" UserEmail="@UserEmail" />
+</div>

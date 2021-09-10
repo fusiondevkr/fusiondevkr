@@ -25,6 +25,11 @@ namespace Fdk.M365Register.ApiApp.Configurations
         public virtual OpenApiSettings OpenApi { get; } = new OpenApiSettings();
 
         /// <summary>
+        /// Gets the <see cref="MsGraphSettings"/> object.
+        /// </summary>
+        public virtual MsGraphSettings MsGraph { get; } = new MsGraphSettings();
+
+        /// <summary>
         /// Gets the <see cref="WorkflowsSettings"/> object.
         /// </summary>
         /// <returns></returns>
@@ -74,6 +79,42 @@ namespace Fdk.M365Register.ApiApp.Configurations
         /// Gets or sets the OpenAPI document title.
         /// </summary>
         public virtual string DocumentTitle { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.OpenApiDocTitleKey) ?? OpenApiConfigurationOptions.DefaultDocTitle(typeof(AppSettings));
+    }
+
+    /// <summary>
+    /// This represents the app settings entity for Microsoft Graph.
+    /// </summary>
+    public class MsGraphSettings
+    {
+        /// <summary>
+        /// Gets or sets the URI for login.
+        /// </summary>
+        public virtual string LoginUri { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.MsGraphLoginUriKey);
+
+        /// <summary>
+        /// Gets or sets the tenant ID.
+        /// </summary>
+        public virtual string TenantId { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.MsGraphTenantIdKey);
+
+        /// <summary>
+        /// Gets or sets the client ID.
+        /// </summary>
+        public virtual string ClientId { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.MsGraphClientIdKey);
+
+        /// <summary>
+        /// Gets or sets the client ID.
+        /// </summary>
+        public virtual string ClientSecret { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.MsGraphClientSecretKey);
+
+        /// <summary>
+        /// Gets or sets the MS Graph API URI.
+        /// </summary>
+        public virtual string ApiUri { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.MsGraphApiUriKey);
+
+        /// <summary>
+        /// Gets or sets the base URI.
+        /// </summary>
+        public virtual string BaseUri { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.MsGraphBaseUriKey);
     }
 
     /// <summary>

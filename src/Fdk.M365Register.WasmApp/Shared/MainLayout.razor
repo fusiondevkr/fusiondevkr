@@ -6,16 +6,11 @@
     </div>
 
     <div class="main">
-        <div class="top-row px-4" hidden="@IsLoginHidden">
-            <a href="/login" class="ml-md-auto" @onclick="OnLoggedInAsync">로그인</a>
+        <div class="top-row px-4 text-end" hidden="@IsLoginHidden">
+            <a href="/login" @onclick="OnLoggedInAsync">로그인</a>
         </div>
-        <div class="top-row px-4" hidden="@IsLogoutHidden">
-            <a href="/logout" class="ml-md-auto" @onclick="OnLoggedOutAsync">로그아웃</a>
-        </div>
-
-        <div class="content px-4">
-            로그인: @IsAuthenticated <br>
-            로그인 정보: @LogInDetails
+        <div class="top-row px-4 text-end" hidden="@IsLogoutHidden">
+            <span class="px-4">@DisplayName</span> | <a href="/logout" @onclick="OnLoggedOutAsync">로그아웃</a>
         </div>
 
         <div class="content px-4">
