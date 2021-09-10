@@ -20,10 +20,15 @@ jobs:
     - name: Checkout the repo
       uses: actions/checkout@v2
 
-    - name: Setup .NET Core SDK
+    - name: Setup .NET Core SDK for 3.1 LTS
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.x'
+
+    - name: Setup .NET SDK for 5
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.x'
 
     - name: Restore NuGet packages
       shell: bash
