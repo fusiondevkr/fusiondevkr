@@ -1,11 +1,13 @@
 {
-  "azureFunctions.projectSubpath": "src/Fdk.CheckPointHelper.FunctionApp",
+  // "azureFunctions.projectSubpath": "src/Fdk.CheckPointHelper.FunctionApp",
   // "azureFunctions.projectSubpath": "src/Fdk.FaceRecogniser.FunctionApp",
   // "azureFunctions.projectSubpath": "src/Fdk.FlowHelper.FunctionApp",
+  "azureFunctions.projectSubpath": "src/Fdk.M365Register.ApiApp",
 
-  "azureFunctions.deploySubpath": "src/Fdk.CheckPointHelper.FunctionApp/bin/Release/netcoreapp3.1/publish",
+  // "azureFunctions.deploySubpath": "src/Fdk.CheckPointHelper.FunctionApp/bin/Release/netcoreapp3.1/publish",
   // "azureFunctions.deploySubpath": "src/Fdk.FaceRecogniser.FunctionApp/bin/Release/netcoreapp3.1/publish",
   // "azureFunctions.deploySubpath": "src/Fdk.FlowHelper.FunctionApp/bin/Release/netcoreapp3.1/publish",
+  "azureFunctions.deploySubpath": "src/Fdk.M365Register.ApiApp/bin/Release/netcoreapp3.1/publish",
 
   "azureFunctions.preDeployTask": "publish",
   "azureFunctions.projectLanguage": "C#",

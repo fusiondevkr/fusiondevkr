@@ -59,13 +59,27 @@
       "type": "func",
       "dependsOn": "build",
       "options": {
-        "cwd": "${workspaceFolder}/src/Fdk.CheckPointHelper.FunctionApp/bin/Debug/netcoreapp3.1"
+        // "cwd": "${workspaceFolder}/src/Fdk.CheckPointHelper.FunctionApp/bin/Debug/netcoreapp3.1"
         // "cwd": "${workspaceFolder}/src/Fdk.FaceRecogniser.FunctionApp/bin/Debug/netcoreapp3.1"
         // "cwd": "${workspaceFolder}/src/Fdk.FlowHelper.FunctionApp/bin/Debug/netcoreapp3.1"
+        "cwd": "${workspaceFolder}/src/Fdk.M365Register.ApiApp/bin/Debug/netcoreapp3.1"
       },
       "command": "host start",
       "isBackground": true,
       "problemMatcher": "$func-dotnet-watch"
+    },
+    {
+      "label": "watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "${workspaceFolder}/src/Fdk.M365Register.WasmApp/Fdk.M365Register.WasmApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
     }
   ]
 }

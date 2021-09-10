@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="mb-3">
+        <div class="alert alert-info" role="alert">
+            안녕하세요 <span>@Name</span>님,<br/>
+            M365 개발자 계정 이메일 주소를 입력해 주세요.<br/>
+            입력하신 개발자 계정을 통해 과정 진도를 체크합니다.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="userEmail" class="form-label">로그인 이메일</label>
+        <input type="email" class="form-control form-control-lg" id="userEmail" value="@UserEmail" aria-label="User email" disabled readonly>
+    </div>
+    <div class="mb-3">
+        <label for="m365Email" class="form-label">M365 개발자 계정 이메일</label>
+        <input type="email" class="form-control form-control-lg" id="m365Email" value="@M365Email" placeholder="M365 개발자 계정 이메일 주소 (예: onyu@contoso.onmicrosoft.com)" aria-label="M365 email">
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-danger" @onclick="Reset">취소</button>
+        <button type="button" class="btn btn-info" @onclick="RegisterM365AccountAsync">확인</button>
+    </div>
+    <div class="mb-3" hidden="@IsHidden">
+        <div class="alert alert-info" role="alert">
+            @Result
+        </div>
+    </div>
+</div>

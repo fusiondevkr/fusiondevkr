@@ -1,0 +1,16 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+
+    "OpenApi__Version": "v3",
+    "OpenApi__DocVersion": "1.0.0",
+    "OpenApi__DocTitle": "M365 Dev Account Registration Interface",
+
+    "Workflows__Registration": "https://<microsoft_flow_registration_endpoint>"
+  },
+  "Host": {
+    "CORS": "https://localhost:5001;http://localhost:5000"
+  }
+}
