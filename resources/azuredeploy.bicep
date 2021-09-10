@@ -29,6 +29,9 @@ param openApiVersion string = 'v3'
 param openApiDocVersion string = 'v1.0.0'
 param openApiDocTitle string = 'Fusion Dev Korea App Interface'
 
+// Static App
+param staticAppToProvision bool = true
+
 module face './faceapi.bicep' = if (faceApiSkuToProvision) {
     name: 'FaceApi'
     params: {
@@ -98,5 +101,15 @@ module fncapp './functionApp.bicep' = if (functionAppToProvision) {
         openApiVersion: openApiVersion
         openApiDocVersion: openApiDocVersion
         openApiDocTitle: openApiDocTitle
+    }
+}
+
+module sttapp './staticWebApp.bicep' = if (staticAppToProvision) {
+    name: 'StaticApp'
+    params: {
+        name: name
+        instanceName: instanceName
+        location: location
+        locationCode: locationCode
     }
 }

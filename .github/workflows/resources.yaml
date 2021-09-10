@@ -34,7 +34,7 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
         deploymentName: 'checkpoint_helper'
         template: 'resources/azuredeploy.bicep'
-        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_CHECKPOINT_HELPER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_CHECKPOINT_HELPER }}"
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_CHECKPOINT_HELPER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false staticAppToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_CHECKPOINT_HELPER }}"
         failOnStdErr: false
 
     - name: Deploy ARM templates for FaceRecogniser
@@ -44,7 +44,7 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
         deploymentName: 'face_recogniser'
         template: 'resources/azuredeploy.bicep'
-        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FACE_RECOGNISER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=true faceApiSku=S0 openApiDocTitle="${{ secrets.DOCTITLE_FACE_RECOGNISER }}"
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FACE_RECOGNISER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=true faceApiSku=S0 staticAppToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_FACE_RECOGNISER }}"
         failOnStdErr: false
 
     - name: Deploy ARM templates for FlowHelper
@@ -54,7 +54,7 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
         deploymentName: 'flow_helper'
         template: 'resources/azuredeploy.bicep'
-        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FLOW_HELPER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_FLOW_HELPER }}"
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_FLOW_HELPER }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false staticAppToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_FLOW_HELPER }}"
         failOnStdErr: false
 
     - name: Deploy ARM templates for Logistics
@@ -64,5 +64,15 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
         deploymentName: 'logistics'
         template: 'resources/azuredeploy.bicep'
-        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_LOGISTICS }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_LOGISTICS }}"
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_LOGISTICS }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false staticAppToProvision=false openApiDocTitle="${{ secrets.DOCTITLE_LOGISTICS }}"
+        failOnStdErr: false
+
+    - name: Deploy ARM templates for M365 account registration
+      uses: Azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+        deploymentName: 'registration'
+        template: 'resources/azuredeploy.bicep'
+        parameters: name=${{ secrets.RESOURCE_NAME }} instanceName=${{ secrets.INSTANCE_REGISTRATION }} locationCode=${{ secrets.LOCATION_CODE }} faceApiSkuToProvision=false storageAccountToProvision=false workspaceToProvision=false appInsightsToProvision=false consumptionPlanToProvision=false functionAppToProvision=false
         failOnStdErr: false
