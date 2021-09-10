@@ -109,7 +109,7 @@ module sttapp './staticWebApp.bicep' = if (staticAppToProvision) {
     params: {
         name: name
         instanceName: instanceName
-        location: location
-        locationCode: locationCode
+        location: 'eastasia'
+        locationCode: 'ea'
     }
 }

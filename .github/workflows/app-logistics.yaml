@@ -1,4 +1,4 @@
-name: CPH App Build, Test & Deploy
+name: LOGI App Build, Test & Deploy
 
 on:
   push:
