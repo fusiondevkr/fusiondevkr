@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using Fdk.M365Register.WasmApp.Helpers;
@@ -50,7 +51,7 @@ namespace Fdk.M365Register.WasmApp.Shared
             this.IsLoginHidden = this.IsAuthenticated;
             this.IsLogoutHidden = !this.IsAuthenticated;
 
-            this.LogInDetails += principal;
+            this.LogInDetails = this.IsAuthenticated ? JsonSerializer.Serialize(principal) : "No login details";
         }
     }
 }
