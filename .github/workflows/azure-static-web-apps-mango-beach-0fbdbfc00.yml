@@ -1,13 +1,22 @@
-name: Azure Static Web Apps CI/CD
+name: M365 App Build, Test & Deploy
 
 on:
   push:
     branches:
-      - main
+    - main
+    paths:
+    - 'src/Fdk.M365Register**/**'
+    - 'test/Fdk.M365Register**/**'
+    - '.github/workflows/azure-static-web-apps-mango-beach-0fbdbfc00.yaml'
+
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types:
+    - opened
+    - synchronize
+    - reopened
+    - closed
     branches:
-      - main
+    - main
 
 jobs:
   build_and_deploy_job:
@@ -29,7 +38,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "src/Fdk.M365Register.WasmApp" # App source code path
           api_location: "src/Fdk.M365Register.ApiApp" # Api source code path - optional
-          output_location: "src/Fdk.M365Register.WasmApp/bin/Release/net5.0/publish" # Built app content directory - optional
+          output_location: "wwwroot" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
