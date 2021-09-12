@@ -17,10 +17,6 @@
       "redirect": "/.auth/logout"
     },
     {
-      "route": "/api/*",
-      "allowedRoles": ["authenticated"]
-    },
-    {
       "route": "/api/swagger/ui",
       "statusCode": 404
     },
@@ -35,6 +31,10 @@
     {
       "route": "/api/oauth-redirect.html",
       "statusCode": 404
+    },
+    {
+      "route": "/api/*",
+      "allowedRoles": ["authenticated"]
     }
   ]
 }
