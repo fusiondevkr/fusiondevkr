@@ -66,8 +66,18 @@ namespace Fdk.M365Register.ApiApp.Configurations
         public const string MsGraphBaseUriKey = "MsGraph__BaseUri";
 
         /// <summary>
+        /// Identifies the workflow key for include check-in.
+        /// </summary>
+        public const string WorkflowsIncludeCheckInKey = "Workflows__IncludeCheckIn";
+
+        /// <summary>
         /// Identifies the workflow key for registration.
         /// </summary>
         public const string WorkflowsRegistrationUrlKey = "Workflows__Registration";
+
+        /// <summary>
+        /// Identifies the workflow key for check-in.
+        /// </summary>
+        public const string WorkflowsCheckInUrlKey = "Workflows__CheckIn";
     }
 }

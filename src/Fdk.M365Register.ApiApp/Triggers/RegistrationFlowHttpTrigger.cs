@@ -78,6 +78,16 @@ namespace Fdk.M365Register.ApiApp.Triggers
                     response = JsonConvert.DeserializeObject<RegistrationResponse>(serialised);
                 }
 
+                if (this._settings.Workflows.IncludeCheckIn)
+                {
+                    var checkin = new CheckInRequest() { Upn = request.M365Email, CheckPoint = 1 };
+                    using (var content = new StringContent(checkin.ToJson(), Encoding.UTF8, ContentTypes.ApplicationJson))
+                    using (var message = await this._http.PostAsync(this._settings.Workflows.CheckInUrl, content).ConfigureAwait(false))
+                    {
+                        message.EnsureSuccessStatusCode();
+                    }
+                }
+
                 res = new OkObjectResult(response);
             }
             catch (Exception ex)

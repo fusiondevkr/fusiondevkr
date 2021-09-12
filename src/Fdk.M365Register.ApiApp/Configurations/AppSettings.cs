@@ -125,6 +125,16 @@ namespace Fdk.M365Register.ApiApp.Configurations
         /// <summary>
         /// Gets or sets the workflow URL for registration.
         /// </summary>
+        public virtual bool IncludeCheckIn { get; set; } = bool.TryParse(Environment.GetEnvironmentVariable(AppSettingsKeys.WorkflowsIncludeCheckInKey), out var result) ? result : false;
+
+        /// <summary>
+        /// Gets or sets the workflow URL for registration.
+        /// </summary>
         public virtual string RegistrationUrl { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.WorkflowsRegistrationUrlKey);
+
+        /// <summary>
+        /// Gets or sets the workflow URL for check-in.
+        /// </summary>
+        public virtual string CheckInUrl { get; set; } = Environment.GetEnvironmentVariable(AppSettingsKeys.WorkflowsCheckInUrlKey);
     }
 }
