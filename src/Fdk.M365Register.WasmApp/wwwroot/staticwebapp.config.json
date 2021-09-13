@@ -17,22 +17,6 @@
       "redirect": "/.auth/logout"
     },
     {
-      "route": "/api/swagger/ui",
-      "statusCode": 404
-    },
-    {
-      "route": "/api/swagger.*",
-      "statusCode": 404
-    },
-    {
-      "route": "/api/openapi/*",
-      "statusCode": 404
-    },
-    {
-      "route": "/api/oauth-redirect.html",
-      "statusCode": 404
-    },
-    {
       "route": "/api/*",
       "allowedRoles": ["authenticated"]
     }

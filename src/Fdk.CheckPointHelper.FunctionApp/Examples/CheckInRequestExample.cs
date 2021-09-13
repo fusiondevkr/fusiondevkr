@@ -22,7 +22,7 @@ namespace Fdk.CheckPointHelper.FunctionApp.Examples
                     "checkin_without_timestamp",
                     new CheckInRequest()
                     {
-                        Upn = "checkpointhelper@fusiondev.kr",
+                        Email = "checkpointhelper@fusiondev.kr",
                         CheckPoint = 1,
                     },
                     namingStrategy
@@ -33,7 +33,7 @@ namespace Fdk.CheckPointHelper.FunctionApp.Examples
                     "checkin_with_timestamp",
                     new CheckInRequest()
                     {
-                        Upn = "checkpointhelper@fusiondev.kr",
+                        Email = "checkpointhelper@fusiondev.kr",
                         CheckPoint = 1,
                         Timestamp = DateTimeOffset.UtcNow,
                     },

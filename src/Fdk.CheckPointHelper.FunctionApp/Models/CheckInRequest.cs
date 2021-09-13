@@ -10,10 +10,10 @@ namespace Fdk.CheckPointHelper.FunctionApp.Models
     public class CheckInRequest
     {
         /// <summary>
-        /// Gets or sets the UPN.
+        /// Gets or sets the check-in user's email.
         /// </summary>
-        [JsonProperty("upn")]
-        public virtual string Upn { get; set; }
+        [JsonProperty("email")]
+        public virtual string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the check-in details.
@@ -24,7 +24,7 @@ namespace Fdk.CheckPointHelper.FunctionApp.Models
         /// <summary>
         /// Gets or sets the timestamp when the user checked-in.
         /// </summary>
-        [JsonProperty("timestamp")]
+        [JsonProperty("timestamp", NullValueHandling = NullValueHandling.Ignore)]
         public virtual DateTimeOffset? Timestamp { get; set; }
     }
 }

@@ -12,8 +12,8 @@ namespace Fdk.M365Register.ApiApp.Models
         /// <summary>
         /// Gets or sets the UPN.
         /// </summary>
-        [JsonProperty("upn")]
-        public virtual string Upn { get; set; }
+        [JsonProperty("email")]
+        public virtual string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the check-in details.
@@ -24,7 +24,7 @@ namespace Fdk.M365Register.ApiApp.Models
         /// <summary>
         /// Gets or sets the timestamp when the user checked-in.
         /// </summary>
-        [JsonProperty("timestamp")]
+        [JsonProperty("timestamp", NullValueHandling = NullValueHandling.Ignore)]
         public virtual DateTimeOffset? Timestamp { get; set; }
     }
 }
