@@ -25,7 +25,7 @@ namespace Fdk.Logistics.FunctionApp.Examples
                         Name = "김온유",
                         Email = "onyu@fourthcoffee.com",
                         Address = "서울시 종로구 종로 1길 50",
-                        Items = new List<ShippingItem>() { new ShippingItem() { Name = "카드", Quantity = 100 }, new ShippingItem() { Name = "풍선", Quantity = 100 } },
+                        Items = new List<ShippingItem>() { new ShippingItem() { ItemId = 1, Quantity = 100 }, new ShippingItem() { ItemId = 4, Quantity = 100 } },
                     },
                     namingStrategy
                 )

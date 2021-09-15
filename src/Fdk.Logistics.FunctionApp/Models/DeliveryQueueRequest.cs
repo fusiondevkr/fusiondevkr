@@ -40,10 +40,10 @@ namespace Fdk.Logistics.FunctionApp.Models
     public class ShippingItem
     {
         /// <summary>
-        /// Gets or sets the shipping item name.
+        /// Gets or sets the shipping item ID.
         /// </summary>
-        [JsonProperty("name")]
-        public virtual string Name { get; set; }
+        [JsonProperty("itemId")]
+        public virtual int ItemId { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping item quantity.
