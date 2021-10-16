@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>퓨전 개발자 스터디 - {{studyName}}</title>
+  <style type="text/css">
+    body {
+      font-family: "맑은 고딕", "Malgun Gothic", "맑은 고딕", "Apple SD 산돌고딕 Neo", "AppleGothic", "Segoe UI", Helvetica, Tahoma, Verdana, sans-serif;
+    }
+  </style>
+</head>
+
+<body style="margin:0; padding:0; background-color:#F2F2F2;">
+  <center>
+    <table width="780" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+      <tr>
+        <td colspan="3" height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" align="center" valign="top">
+
+          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td align="center" valign="top">
+
+                <img src="https://fusiondev.kr/images/top-banner-780x160@2.png" width="780" height="160" style="margin:0; padding:0; border:none; display:block;" border="0" alt="퓨전 개발자 스터디 배너" />
+
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td width="10"></td>
+        <td align="center" valign="top">
+
+          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td align="left" valign="top">
+
+                <p>안녕하세요 {{name}}님,</p>
+                <p>&nbsp;</p>
+                <p>퓨전 개발자 스터디, {{studyName}}에 등록하신 것을 환영합니다!</p>
+
+              </td>
+            </tr>
+
+            <tr>
+              <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
+            </tr>
+
+            <tr>
+              <td align="left" valign="top" bgcolor="#F2F2F2">
+
+                <p><span style="font-size:16px; color:#5B0277;"><strong>아직 등록 절차가 끝나지 않았습니다!</strong></span></p>
+                <p>&nbsp;</p>
+                <p>만약 <span style="color:#5B0277;"><strong>Fusion DEV Korea이(가) 조직 내에서 애플리케이션에 액세스하도록 초대함</strong></span> 이라는 제목의 이메일을 하나 더 받으신 경우에는 해당 메일을 열어 <span style="color:#5B0277;"><strong>초대 수락</strong></span> 링크를 클릭해서 최종 등록을 완성해 주시기 바랍니다.</p>
+                <p>&nbsp;</p>
+                <p>이 부트캠프에 참여하기 위해서는 현재 등록하신 이 이메일 주소가 <a href="https://account.microsoft.com" target="_blank" style="color:#5B0277; text-decoration:underline;">마이크로소프트 계정(MSA)</a>에 등록이 되어 있어야 합니다. 만약 이 이메일 주소를 MSA에 등록하지 않았다면 <a href="https://account.microsoft.com" target="_blank" style="color:#5B0277; text-decoration:underline;">여기</a>를 클릭해서 등록하시기 바랍니다.</p>
+
+              </td>
+            </tr>
+
+            <tr>
+              <td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
+            </tr>
+
+            <tr>
+              <td align="left" valign="top">
+
+                <p>오는 {{eventDate}}에 진행하는 부트캠프는 짧은 시간에 파워 앱과 파워 오토메이트를 주어진 시나리오에 맞춰서 만들어 보는 과정인데요, 최대한 여러분들께서 끝까지 따라하실 수 있게끔 구성할 예정입니다.</p>
+                <p>&nbsp;</p>
+                <p>부트캠프와 관련해서 궁금한 것이 있다면 언제든 우리 <a href="{{qnaLink}}" target="_blank" style="color:#5B0277; text-decoration:underline;">{{qnaName}}</a> 채널로 문의 주세요.</p>
+                <p>&nbsp;</p>
+                <p>곧 부트캠프 초대 이메일이 발송될 예정인데요, 거기서 꼭 {{name}}님을 뵙고 싶습니다!</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>퓨전 개발자 스터디 그룹 운영진 일동 | <a href="https://fusiondev.kr" target="_blank" style="color:#5B0277; text-decoration:underline;">fusiondev.kr</a></p>
+                <p>&nbsp;</p>
+                <ul>
+                  <li>퓨전 개발자 스터디 행동 강령 (Code of Conduct): <a href="https://github.com/fusiondevkr/{{course}}/blob/main/CODE_OF_CONDUCT.md" target="_blank" style="color:#5B0277; text-decoration:underline;">링크</a></li>
+                  <li>퓨전 개발자 스터디 개인정보 보호정책: <a href="https://github.com/fusiondevkr/{{course}}/blob/main/PRIVACY_POLICY.md" target="_blank" style="color:#5B0277; text-decoration:underline;">링크</a></li>
+                </ul>
+
+              </td>
+            </tr>
+          </table>
+
+        </td>
+        <td width="10">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td colspan="3" height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
+      </tr>
+    </table>
+
+  </center>
+</body>
+
+</html>
